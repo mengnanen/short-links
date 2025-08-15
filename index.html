@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" href="asset/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>一只会飞的旺旺</title>
+  <title>短链生成器</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css">
   <style>
     body {
@@ -102,27 +102,27 @@
 <body>
   <main>
     <div class="container">
-      <h1 class="text-3xl font-bold text-gray-800">一只会飞的旺旺</h1>
+      <h1 class="text-3xl font-bold text-gray-800">short-links</h1>
       <div x-data="app" x-cloak>
         <p x-show.transition.opacity="alert" :class="alert?.type" x-text="alert?.message"></p>
         <div class="mb-4">
-          <input placeholder="输入要缩短的网址..." x-model="url" x-ref="url"
+          <input placeholder="输入要缩短的网址(https://开头)" x-model="url" x-ref="url"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" />
         </div>
         <!-- 在 x-data="app" 下的 input url 后添加 -->
         <div class="mb-4">
           <input type="password" 
-                placeholder="请输入访问密码..." 
+                placeholder="请输入访问密码(默认为空)" 
                 x-model="password"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" />
         </div>
         <details class="mb-4 border border-gray-300 rounded-md">
           <summary class="px-4 py-2 cursor-pointer font-medium">自定义设置</summary>
           <div class="px-4 py-2">
-            <input placeholder="自定义短链接 (可选)" x-model="slug"
+            <input placeholder="自定义短链接(默认随机)" x-model="slug"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:shadow-outline" />
             <div class="mt-2">
-              <label for="expiry" class="block text-sm font-medium text-gray-700">过期时间 (可选):</label>
+              <label for="expiry" class="block text-sm font-medium text-gray-700">过期时间(默认永久):</label>
               <select id="expiry" x-model="expiry"
                 class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                 <option value="">永不过期</option>
@@ -142,8 +142,16 @@
       </div>
     </div>
   </main>
-  <footer class="text-gray-600">
-      <a href="https://www.wangwangit.com">一只会飞的旺旺</a>
+  
+  <footer>
+    <div class="footer-icons">
+      <a href="https://github.com/mengnanen" target="_blank"><img src="svg/github.svg" alt="GitHub"></a>
+      <a href="https://t.me/youwudailybot" target="_blank"><img src="svg/telegram.svg" alt="Telegram"></a>
+    </div>
+    
+    <div class="footer-copy">
+      Copyright © 2025 王小二. All rights reserved. Made with Love.
+    </div>
   </footer>
 
   <script src="asset/js/alpine.js"></script>
