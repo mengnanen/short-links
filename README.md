@@ -19,27 +19,42 @@
 5.  **创建 D1 数据库：** 参考 [https://github.com/x-dr/telegraph-Image/blob/main/docs/manage.md](https://github.com/x-dr/telegraph-Image/blob/main/docs/manage.md) 创建一个 D1 数据库。
 6.  **创建数据库表：** 在 D1 数据库控制台中执行以下 SQL 命令创建表：
 ```sql
+-- 先删表（可选）
 DROP TABLE IF EXISTS links;
-CREATE TABLE IF NOT EXISTS links (
-  `id` integer PRIMARY KEY NOT NULL,
-  `url` text,
-  `slug` text,
-  `ua` text,
-  `ip` text,
-  `status` int,
-  `create_time` DATE,
-  `expires_at` timestamp  -- 添加过期时间字段
-);
 DROP TABLE IF EXISTS logs;
-CREATE TABLE IF NOT EXISTS logs (
-  `id` integer PRIMARY KEY NOT NULL,
-  `url` text ,
-  `slug` text,
-  `referer` text,
-  `ua` text ,
-  `ip` text ,
-  `create_time` DATE
+
+-- 建 links 表
+CREATE TABLE IF NOT EXISTS links (
+  id           INTEGER PRIMARY KEY NOT NULL,
+  url          TEXT NOT NULL,
+  slug         TEXT UNIQUE,
+  ua           TEXT,
+  ip           TEXT,
+  status       INTEGER DEFAULT 1,
+  create_time  TEXT DEFAULT (datetime('now')),
+  expires_at   TEXT           -- 过期时间（ISO8601 字符串或 NULL）
 );
+
+-- 建 logs 表
+CREATE TABLE IF NOT EXISTS logs (
+  id           INTEGER PRIMARY KEY NOT NULL,
+  url          TEXT,
+  slug         TEXT,
+  referer      TEXT,
+  ua           TEXT,
+  ip           TEXT,
+  create_time  TEXT DEFAULT (datetime('now'))
+);
+
+--（可选）索引
+CREATE UNIQUE INDEX IF NOT EXISTS idx_links_slug ON links(slug);
+CREATE INDEX IF NOT EXISTS idx_logs_slug ON logs(slug);
+
+-- 快速质检，能看到 links 和 logs 两个表即成功
+SELECT name, sql FROM sqlite_master WHERE type='table';
+
+-- 追加密码
+ALTER TABLE links ADD COLUMN password TEXT;
 ```
 
 ## API
