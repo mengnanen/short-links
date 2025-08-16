@@ -54,18 +54,37 @@
     }
 
     footer {
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: transparent;
       /* 设置页脚背景颜色及透明度 */
-      padding: 20px;
+      padding: 16px 12px;
       text-align: center;
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: none;
       /* 添加顶部阴影 */
     }
 
+    /* 底部社交图标：居中、缩小、留间距 */
+    .footer-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;           /* 图标间距 */
+      margin-bottom: 6px;  /* 图标与版权文字的间距 */
+    }
+    .footer-icons img {
+      width: 32px;         /* 图标大小（可调 28~40） */
+      height: 32px;
+      opacity: 0.85;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .footer-icons img:hover {
+      transform: translateY(-2px) scale(1.05);
+      opacity: 1;
+    }
+    
     h1 {
       font-size: 3em;
       /* 加大标题字体 */
