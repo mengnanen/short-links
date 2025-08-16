@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS links (
   ip           TEXT,
   status       INTEGER DEFAULT 1,
   create_time  TEXT DEFAULT (datetime('now')),
-  expires_at   TEXT           -- 过期时间（ISO8601 字符串或 NULL）
+  expires_at   TEXT          
 );
 
 -- 建 logs 表
