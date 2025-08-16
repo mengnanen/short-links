@@ -94,8 +94,8 @@ export async function onRequest(context) {
 
     // 写库（参数化，避免注入）
     await env.DB.prepare(
-      'INSERT INTO links (url, slug, ip, status, ua, create_time, expires_at) VALUES (?, ?, ?, 1, ?, ?, ?)'
-    ).bind(url, slug2, ip, ua, create_time, expires_at).run();
+      'INSERT INTO links (url, slug, ip, status, ua, create_time, expires_at, password) VALUES (?, ?, ?, 1, ?, ?, ?, ?)'
+    ).bind(url, slug2, ip, ua, create_time, expires_at, password || null).run();
 
     return json({ slug: slug2, link: `${origin}/${slug2}` });
   } catch (e) {
